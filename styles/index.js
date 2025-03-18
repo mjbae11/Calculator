@@ -15,7 +15,13 @@ const zero = document.getElementById("zero");
 const backspace = document.getElementById("backspace");
 const display = {
     updateDisplay: function (number) {
-        output.textContent = number;
+        // limit lenght of display
+        if (output.textContent.length <= 10) {
+            if (output.textContent == 0) {
+                output.textContent = "";
+            }
+            output.textContent += number;
+        }
     },
 };
 
@@ -23,7 +29,13 @@ const buttons = {
     // Method to handle number button clicks
     numberButtonClick: function (event) {
         // get number from the button
-        console.log(event.target.textContent);
+        display.updateDisplay(event.target.textContent);
+    },
+    backspaceBtnClick: function () {
+        output.textContent = output.textContent.slice(0, -1);
+        if (output.textContent == "") {
+            output.textContent = 0;
+        }
     },
 };
 
@@ -31,3 +43,5 @@ const allButtons = document.querySelectorAll("button");
 for (let i = 0; i < 10; i++) {
     allButtons[i].addEventListener("click", buttons.numberButtonClick);
 }
+
+backspace.addEventListener('click', buttons.backspaceBtnClick)
