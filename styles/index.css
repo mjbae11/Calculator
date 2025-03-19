@@ -14,18 +14,66 @@ h1{
 
 }
 .Calculator{
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
-    border: 1px solid black;
+    background: #fff;
+    border-radius: 10px;
+    /* border: 1px solid black; */
+    padding: 20px;
     width: 400px;
     height: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
 }
 
-.buttons {
+
+.display{
+    /* border: 1px solid black; */
+    padding: 25px;
+    text-align: right;
+    font-size: xx-large;
+    font-family:monospace;
+    border-radius: 5px;
+    margin-top: 5px;
+    background: #3d343448;
+    color: #000;
+}
+
+.buttons {   /* to structre the button template outine*/
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
     gap: 10px;
+    padding-top: 35px;
 }
+
+.btn { /* to customize each button*/
+    padding: 15px;
+    font-size: 1.2em;
+    font-family: monospace;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+
+}
+
+.btn.operator {
+    background: #f39c12;
+    color: #fff;
+}
+
+#equals {
+    grid-column: span 2 ;
+}
+
+.btn:hover{
+    background: grey;
+    color: whitesmoke;
+}
+
+.btn.operator:hover{
+    background: #6a4403;
+    color: black;
+}
+
+
+
+
 
