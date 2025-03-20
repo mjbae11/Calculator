@@ -18,6 +18,7 @@ const add = document.getElementById("add");
 const subtract = document.getElementById("subtract");
 const multiply = document.getElementById("multiply");
 const divide = document.getElementById("divide");
+const equals = document.getElementById("equals");
 
 const display = {
     updateDisplay: function (input) {
@@ -29,6 +30,9 @@ const display = {
             output.textContent += input;
         }
     },
+    changeDisplayTo: function(input) {
+        output.textContent = input;
+    }
 };
 
 const buttons = {
@@ -49,8 +53,13 @@ const buttons = {
         if (!output.textContent.slice(-1).match(/[+\-*/]/g)) {
             display.updateDisplay(event.target.textContent);
         }
-        
+        // replace if another operator
     },
+    equalsBtnClick: function () {
+        let expression = output.textContent;
+        let result = eval(expression);
+        display.changeDisplayTo(result);
+    }
 };
 // Number button event listeners, gets the first 10 buttons
 const numberButtons = document.querySelectorAll("button");
@@ -73,4 +82,7 @@ multiply.addEventListener("click", (event) => {
 });
 divide.addEventListener("click", (event) => {
     buttons.basicOperationBtnClick(event);
+});
+equals.addEventListener("click", (event) => {
+    buttons.equalsBtnClick(event);
 });
