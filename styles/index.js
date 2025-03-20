@@ -19,8 +19,13 @@ const subtract = document.getElementById("subtract");
 const multiply = document.getElementById("multiply");
 const divide = document.getElementById("divide");
 const equals = document.getElementById("equals");
+
 const switchNegPos = document.getElementById("switchNegPos");
 const dot = document.getElementById("dot");
+
+// Clear display
+const clear = document.getElementById("clear");
+
 
 const display = {
     updateDisplay: function (input) {
