@@ -1,4 +1,4 @@
-"use strict";
+
 // Display
 const output = document.querySelector("h1");
 // Number buttons
@@ -19,20 +19,22 @@ const subtract = document.getElementById("subtract");
 const multiply = document.getElementById("multiply");
 const divide = document.getElementById("divide");
 const equals = document.getElementById("equals");
+const switchNegPos = document.getElementById("switchNegPos");
+const dot = document.getElementById("dot");
 
 const display = {
     updateDisplay: function (input) {
         // limit lenght of display
-        if (output.textContent.length <= 10) {
+        if (output.textContent.length <= 15) {
             if (output.textContent == 0) {
                 output.textContent = "";
             }
             output.textContent += input;
         }
     },
-    changeDisplayTo: function(input) {
+    changeDisplayTo: function (input) {
         output.textContent = input;
-    }
+    },
 };
 
 const buttons = {
@@ -57,9 +59,29 @@ const buttons = {
     },
     equalsBtnClick: function () {
         let expression = output.textContent;
+        // was SUPPOSED to be for managing leading zeros and stuff
+        // if (expression.match(/(?<!\d)0{2,}(?!\d)/)) {
+        //     console.log("there are zeros.");
+        // }
         let result = eval(expression);
         display.changeDisplayTo(result);
-    }
+    },
+    // FIXME: edge cases in addig "-(" or ")" when other characters are around them
+    negPosBtnClick: function (event) {
+        // check if it contains the parenthesis stuff
+        if (
+            !(
+                output.textContent.slice(0, 2) === "-(" &&
+                output.textContent.slice(-1) === ")"
+            )
+        ) {
+            let newOutput = "-(" + output.textContent + ")";
+            display.changeDisplayTo(newOutput);
+        } else {
+            let revertOutput = output.textContent.slice(2, -1);
+            output.textContent = revertOutput;
+        }
+    },
 };
 // Number button event listeners, gets the first 10 buttons
 const numberButtons = document.querySelectorAll("button");
@@ -86,3 +108,9 @@ divide.addEventListener("click", (event) => {
 equals.addEventListener("click", (event) => {
     buttons.equalsBtnClick(event);
 });
+switchNegPos.addEventListener("click", (event) => {
+    buttons.negPosBtnClick(event);
+});
+// dot.addEventListener("click", (event) => {
+
+// })
