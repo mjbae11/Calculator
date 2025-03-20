@@ -45,16 +45,11 @@ const buttons = {
         }
     },
     basicOperationBtnClick: function (event) {
-        // FIXME: this is just test console log
-        console.log(output);
         // RegEx for matching "+ - * /"
-        // TODO: replace a previous operator with the new one, once the user clicks 2 in a row
-        // FIXME: enters if statement after 3 operators, not 2 for some reason.
-        if (output.textContent.slice(0, -1).match(/[+\-*/]/g)) {
-            // FIXME: this is just test console log
-            console.log("working?");
+        if (!output.textContent.slice(-1).match(/[+\-*/]/g)) {
+            display.updateDisplay(event.target.textContent);
         }
-        display.updateDisplay(event.target.textContent);
+        
     },
 };
 // Number button event listeners, gets the first 10 buttons
