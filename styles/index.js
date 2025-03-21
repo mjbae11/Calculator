@@ -1,6 +1,6 @@
-
 // Display
-const output = document.querySelector("h1");
+const output = document.querySelector(".display");
+console.log(output.textContent);
 // Number buttons
 const one = document.getElementById("one");
 const two = document.getElementById("two");
@@ -12,7 +12,9 @@ const seven = document.getElementById("seven");
 const eight = document.getElementById("eight");
 const nine = document.getElementById("nine");
 const zero = document.getElementById("zero");
-const backspace = document.getElementById("backspace");
+// FIXME: NO BACKSPACE ATM
+// const backspace = document.getElementById("backspace");
+
 // Basic operators
 const add = document.getElementById("add");
 const subtract = document.getElementById("subtract");
@@ -25,7 +27,6 @@ const dot = document.getElementById("dot");
 
 // Clear display
 const clear = document.getElementById("clear");
-
 
 const display = {
     updateDisplay: function (input) {
@@ -87,15 +88,30 @@ const buttons = {
             output.textContent = revertOutput;
         }
     },
+    dotBtnClick: function () {
+        console.log("this is the dot function");
+        display.updateDisplay(".");
+    },
+    clearBtnClick: function () {
+        display.changeDisplayTo("0");
+    },
 };
-// Number button event listeners, gets the first 10 buttons
-const numberButtons = document.querySelectorAll("button");
-for (let i = 0; i < 10; i++) {
-    numberButtons[i].addEventListener("click", buttons.numberButtonClick);
-}
+// Number button event listeners
+one.addEventListener("click", buttons.numberButtonClick);
+two.addEventListener("click", buttons.numberButtonClick);
+three.addEventListener("click", buttons.numberButtonClick);
+four.addEventListener("click", buttons.numberButtonClick);
+five.addEventListener("click", buttons.numberButtonClick);
+six.addEventListener("click", buttons.numberButtonClick);
+seven.addEventListener("click", buttons.numberButtonClick);
+eight.addEventListener("click", buttons.numberButtonClick);
+nine.addEventListener("click", buttons.numberButtonClick);
+zero.addEventListener("click", buttons.numberButtonClick);
 
 // Backspace event listener
-backspace.addEventListener("click", buttons.backspaceBtnClick);
+// backspace.addEventListener("click", buttons.backspaceBtnClick);
+// Clear button listener
+clear.addEventListener("click", buttons.clearBtnClick);
 
 // Basic operator listeners (repetitive)
 add.addEventListener("click", (event) => {
@@ -116,6 +132,6 @@ equals.addEventListener("click", (event) => {
 switchNegPos.addEventListener("click", (event) => {
     buttons.negPosBtnClick(event);
 });
-// dot.addEventListener("click", (event) => {
-
-// })
+dot.addEventListener("click", (event) => {
+    buttons.dotBtnClick(event);
+});
