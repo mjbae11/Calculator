@@ -24,6 +24,7 @@ const equals = document.getElementById("equals");
 
 const switchNegPos = document.getElementById("switchNegPos");
 const dot = document.getElementById("dot");
+const percent = document.getElementById("percent");
 
 // Clear display
 const clear = document.getElementById("clear");
@@ -31,7 +32,7 @@ const clear = document.getElementById("clear");
 const display = {
     updateDisplay: function (input) {
         // limit lenght of display
-        if (output.textContent.length <= 15) {
+        if (output.textContent.length <= 20) {
             if (output.textContent == 0) {
                 output.textContent = "";
             }
@@ -69,8 +70,16 @@ const buttons = {
         // if (expression.match(/(?<!\d)0{2,}(?!\d)/)) {
         //     console.log("there are zeros.");
         // }
-        let result = eval(expression);
-        display.changeDisplayTo(result);
+
+        if (expression.includes("%")) {
+            const newString = expression.replace(/(\d+(\.\d+)?)%/g, "($1/100)");
+            console.log(newString);
+            let result = eval(newString);
+            display.changeDisplayTo(result);
+        } else {
+            let result = eval(expression);
+            display.changeDisplayTo(result);
+        }
     },
     // FIXME: edge cases in addig "-(" or ")" when other characters are around them
     negPosBtnClick: function (event) {
@@ -94,6 +103,9 @@ const buttons = {
     },
     clearBtnClick: function () {
         display.changeDisplayTo("0");
+    },
+    percentBtnClick: function () {
+        display.updateDisplay("%");
     },
 };
 // Number button event listeners
@@ -134,4 +146,7 @@ switchNegPos.addEventListener("click", (event) => {
 });
 dot.addEventListener("click", (event) => {
     buttons.dotBtnClick(event);
+});
+percent.addEventListener("click", () => {
+    buttons.percentBtnClick();
 });
