@@ -3,7 +3,6 @@ const buttons = document.querySelectorAll(".btn");
 
 let currentInput = "";
 let operator = "";
-let previousInput = "";
 
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -30,17 +29,15 @@ buttons.forEach((button) => {
         } else if (["+", "-", "*", "/"].includes(value)) {
             // If an operator is clicked, store the previous input and operator
             if (currentInput !== "") {
-                previousInput = currentInput;
-                currentInput = "";
-                operator = value;
+                currentInput += value;
+                display.textContent = currentInput;
             }
         } else if (value === "=") {
             // Calculate the result when "=" is clicked
-            if (previousInput !== "" && currentInput !== "") {
-                const result = eval(`${previousInput} ${operator} ${currentInput}`);
+            if ( currentInput !== "") {
+                const result = eval(`${currentInput}`);
                 display.textContent = result;
                 currentInput = result.toString();
-                previousInput = "";
                 operator = "";
             }
         }
